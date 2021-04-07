@@ -1,34 +1,32 @@
-from os.path import dirname, join
-import os
 import sys
-import cv2
-from cascade_face_detector.cascade_face_detector import detect_faces_cascade
+
+from face_detectors.cascade_face_detector.cascade_face_detector import detect_faces_cascade
 
 
-class Method:
+class DetectionMethod:
     CASCADE = 1
     HOG = 2
     DNN = 3
 
 
-def detect_faces(image, method=Method.CASCADE):
+def detect_faces(image, method=DetectionMethod.CASCADE):
     switcher = {
-        Method.CASCADE: detect_faces_cascade,
-        Method.HOG: detect_faces_hog,
-        Method.DNN: detect_faces_dnn
+        DetectionMethod.CASCADE: detect_faces_cascade,
+        DetectionMethod.HOG: _detect_faces_hog,
+        DetectionMethod.DNN: _detect_faces_dnn
     }
     faces = switcher.get(method, lambda: __invalid_method_exception())(image)
     return faces
 
 
 def __invalid_method_exception():
-    print("Invalid method:", sys.exc_info()[0])
+    print("Invalid detection method:", sys.exc_info()[0])
     raise
 
 
-def detect_faces_hog(image):
+def _detect_faces_hog(image):
     return []
 
 
-def detect_faces_dnn(image):
+def _detect_faces_dnn(image):
     return []

@@ -1,8 +1,13 @@
 import numpy as np
 import cv2
+import sys
 
 
-def anonymize_face_pixelate(image, blocks=10):
+class AnonymizeMethod:
+    PIXELATE = 1
+
+
+def _pixelate_image(image, blocks=10):
     # divide the input image into NxN blocks
     (h, w) = image.shape[:2]
     x_steps = np.linspace(0, w, blocks + 1, dtype="int")
@@ -28,3 +33,16 @@ def anonymize_face_pixelate(image, blocks=10):
 
     # return the pixelated blurred image
     return image
+
+
+def anonymize_face(image, method=AnonymizeMethod.PIXELATE):
+    switcher = {
+        AnonymizeMethod.PIXELATE: _pixelate_image
+    }
+    anonymized_face = switcher.get(method, lambda: __invalid_method_exception())(image)
+    return anonymized_face
+
+
+def __invalid_method_exception():
+    print("Invalid detection method:", sys.exc_info()[0])
+    raise
