@@ -1,10 +1,9 @@
-from os.path import dirname, join
-import os
+from os.path import join
 import cv2
+from cv2.data import haarcascades
 
-root_path = dirname(__file__)
-cascade_front_path = join(root_path, "haarcascade_frontalface_default.xml")
-cascade_profile_path = join(root_path, "haarcascade_profileface.xml")
+cascade_front_path = join(haarcascades, "haarcascade_frontalface_default.xml")
+cascade_profile_path = join(haarcascades, "haarcascade_profileface.xml")
 face_front_cascade = cv2.CascadeClassifier(cascade_front_path)
 face_profile_cascade = cv2.CascadeClassifier(cascade_profile_path)
 
