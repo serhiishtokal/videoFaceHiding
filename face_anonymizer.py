@@ -9,17 +9,7 @@ output_file_path = join(dirname(video_file_path), "DNN Caffe.mp4")
 output_directory_path = join(dirname(video_file_path), "anon")
 
 
-def _get_anonymized_frame(frame, detection_method, anonymize_method):
-    faces = detect_faces(frame, detection_method)
 
-    for (x_start, y_start, w, h) in faces:
-        x_end = x_start + w
-        y_end = y_start + h
-
-        face = frame[y_start:y_end, x_start:x_end]
-        face = anonymize_face(face, anonymize_method)
-        frame[y_start:y_end, x_start:x_end] = face
-    return frame
 
 
 def anonymize_stream_opencv(detection_method=DetectionMethod.CASCADE, anonymize_method=AnonymizeMethod.PIXELATE):
