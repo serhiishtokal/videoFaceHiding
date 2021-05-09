@@ -24,10 +24,11 @@ class FaceDetector:
 
     def __init_face_detector(self, detection_method: DetectionMethod) -> IFaceDetector:
         switcher = {
-            DetectionMethod.CASCADE: CascadeFaceDetector(),
-            DetectionMethod.DNN_CAFFE: DnnCaffeFaceDetector(),
+            DetectionMethod.CASCADE: CascadeFaceDetector,
+            DetectionMethod.DNN_CAFFE: DnnCaffeFaceDetector,
         }
-        return switcher.get(detection_method, lambda: self.__invalid_method_exception())
+        face_detector_class = switcher.get(detection_method, lambda: self.__invalid_method_exception())
+        return face_detector_class()
 
     @staticmethod
     def __invalid_method_exception():

@@ -13,7 +13,7 @@ class DnnCaffeFaceDetector(implements(IFaceDetector)):
         self.__prototxt_path = join(self.__root_path, "model", "deploy.prototxt")
         self.__weights_path = join(self.__root_path, "model",
                                    "res10_300x300_ssd_iter_140000.caffemodel")
-        print("[INFO] loading face detector model...")
+        print("[INFO] loading DNN Caffe face detector model...")
         self.__net = cv2.dnn.readNet(self.__prototxt_path, self.__weights_path)
 
     def detect_faces(self, image, min_confidence=0.6):
