@@ -1,5 +1,5 @@
 from .face_detectors.FaceDetector import DetectionMethod, FaceDetector
-from .face_hiders.image_anonymizer import AnonymizeMethod, anonymize_face
+from .image_hiders.image_hiding import AnonymizeMethod, anonymize_face
 
 
 class FaceAnonymizationService:
