@@ -1,4 +1,4 @@
-from .face_detectors.face_detector import DetectionMethod, FaceDetector
+from .face_detectors.FaceDetector import DetectionMethod, FaceDetector
 from .face_hiders.image_anonymizer import AnonymizeMethod, anonymize_face
 
 
