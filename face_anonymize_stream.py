@@ -17,4 +17,4 @@ def anonymize_stream(detection_method=DetectionMethod.DNN_CAFFE, anonymize_metho
     video_capture.release()
 
 
-anonymize_stream(DetectionMethod.DNN_CAFFE, AnonymizeMethod.PIXELATE)
+anonymize_stream(DetectionMethod.ULFD, AnonymizeMethod.PIXELATE)

@@ -3,6 +3,7 @@ from .IFaceDetector import IFaceDetector
 
 from .cascade_face_detector.CascadeFaceDetector import CascadeFaceDetector
 from .dnn_caffe_face_detector.DnnCaffeFaceDetector import DnnCaffeFaceDetector
+from .ULFG_face_detector.UlfgFaceDetector import UlfgFaceDetector
 
 
 class DetectionMethod:
@@ -13,6 +14,11 @@ class DetectionMethod:
     @staticmethod
     def DNN_CAFFE() -> IFaceDetector:
         return DnnCaffeFaceDetector()
+
+    # Ultra-Light-Fast-Generic-Face-Detector
+    @staticmethod
+    def ULFD() -> IFaceDetector:
+        return UlfgFaceDetector()
 
 
 class FaceDetector:
