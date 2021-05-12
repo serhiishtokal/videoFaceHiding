@@ -20,7 +20,7 @@ class FaceDetector:
         self.__detection_method = detection_method
         self.__face_detector = detection_method()
 
-    def detect_faces(self, image):
+    def detect_faces(self, image) -> list:
         faces = self.__face_detector.detect_faces(image)
         return faces
 
