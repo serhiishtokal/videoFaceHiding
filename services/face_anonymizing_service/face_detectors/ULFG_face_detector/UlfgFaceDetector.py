@@ -1,23 +1,20 @@
 from pathlib import Path
-import cv2
-import numpy as np
+
 import torch
 from numpy import ndarray
 from interface import implements
 
 from ..IFaceDetector import IFaceDetector
-
 from .vision.ssd.mb_tiny_RFB_fd import create_Mb_Tiny_RFB_fd, create_Mb_Tiny_RFB_fd_predictor
 from .vision.ssd.config.fd_config import define_img_size
-from .vision.utils.misc import Timer
+from ...helpers.image_helper import image_resize
 
 
 # Ultra-Light-Fast-Generic-Face-Detector
 class UlfgFaceDetector(implements(IFaceDetector)):
 
-    def __init__(self) -> None:
-        input_img_size = 480
-        define_img_size(input_img_size)
+    def __init__(self, input_img_width=640) -> None:
+        define_img_size(input_img_width)
 
         voc_model_path = Path(__file__).parent / "./models/voc-model-labels.txt"
 

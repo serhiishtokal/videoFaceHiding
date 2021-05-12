@@ -18,7 +18,7 @@ class DetectionMethod:
     # Ultra-Light-Fast-Generic-Face-Detector
     @staticmethod
     def ULFD() -> IFaceDetector:
-        return UlfgFaceDetector()
+        return UlfgFaceDetector(input_img_width=640)
 
 
 class FaceDetector:
