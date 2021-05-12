@@ -1,5 +1,5 @@
 opencv-python~=4.5.1.48
 numpy~=1.20.2
 python-interface~=1.6.1
-torch~=1.8.0
+torch~=1.8.1
 torchvision~=0.9.1

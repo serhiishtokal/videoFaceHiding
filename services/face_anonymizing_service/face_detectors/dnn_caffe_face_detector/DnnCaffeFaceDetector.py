@@ -28,5 +28,5 @@ class DnnCaffeFaceDetector(implements(IFaceDetector)):
             confidence = detections[0, 0, i, 2]
             if confidence > self.__min_confidence:
                 box = (detections[0, 0, i, 3:7] * np.array([w, h, w, h])).astype("int")
-                faces.append([box[0], box[1], box[2] - box[0], box[3] - box[1]])
+                faces.append([box[0], box[1], box[2], box[3]])
         return faces

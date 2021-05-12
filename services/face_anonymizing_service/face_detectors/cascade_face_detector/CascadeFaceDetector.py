@@ -33,4 +33,12 @@ class CascadeFaceDetector(implements(IFaceDetector)):
         faces_front = self.__get_faces(image, self.__face_front_cascade, 1.2, 3)
         faces_profile = self.__get_faces(image, self.__face_profile_cascade, 1.2, 3)
         faces = list(faces_front) + list(faces_profile)
-        return faces
+
+        boxes = list(map(self.__toPointsBox, faces))
+        return boxes
+
+    @staticmethod
+    def __toPointsBox(rectangle):
+        return [rectangle[0], rectangle[1], rectangle[0]+rectangle[2], rectangle[1]+rectangle[3]]
+
+

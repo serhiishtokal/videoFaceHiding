@@ -1,6 +1,7 @@
 from pathlib import Path
 import cv2
 import numpy as np
+import torch
 from numpy import ndarray
 from interface import implements
 
@@ -36,26 +37,33 @@ class UlfgFaceDetector(implements(IFaceDetector)):
         net.load(model_path)
 
     def detect_faces(self, image: ndarray) -> list:
-        (h, w) = image.shape[:2]
-        faces = []
+        # (h, w) = image.shape[:2]
+        # faces = []
         boxes_tensor, labels, probs = self.__predictor.predict(image, self.__candidate_size / 2, self.__threshold)
-        if not boxes_tensor.size(0) > 0:
-            return faces
-        boxes_np = boxes_tensor.cpu().detach().numpy()
-        for i in range(boxes_np.shape[0]):
-            detections = boxes_np[i, :]
-            box = (detections[0:4]).astype("int")
-            faces.append([box[0], box[1], box[2] - box[0], box[3] - box[1]])
-            # label = f" {probs[i]:.2f}"
-            # point1 = (box[0], box[1])
-            # point2 = (box[2], box[3])
-            # color = (0, 255, 0)
-            # thickness = 4
-            # cv2.rectangle(image, point1, point2, color, thickness)
 
-        return faces
+        boxes_tensor_int = boxes_tensor.type(torch.IntTensor)
+
+        # for i in range(boxes_tensor.size(0)):
+        #     box = boxes_tensor[i, :].type(torch.IntTensor)
+        #     faces.append([box[0], box[1], box[2]-box[0], box[3]-box[1]])
+
+
+        # if not boxes_tensor.size(0) > 0:
+        #     return faces
+        # boxes_np = boxes_tensor.cpu().detach().numpy()
+        # for i in range(boxes_np.shape[0]):
+        #     detections = boxes_np[i, :]
+        #     box = (detections[0:4]).astype("int")
+        #     faces.append([box[0], box[1], box[2] - box[0], box[3] - box[1]])
+        #     # label = f" {probs[i]:.2f}"
+        #     # point1 = (box[0], box[1])
+        #     # point2 = (box[2], box[3])
+        #     # color = (0, 255, 0)
+        #     # thickness = 4
+        #     # cv2.rectangle(image, point1, point2, color, thickness)
+        return boxes_tensor_int
 
 
 class TestDevice:
     CPU = "cpu"
-    GPU = "cuda:2"
+    GPU = "cuda:0"
