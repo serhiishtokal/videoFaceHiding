@@ -6,23 +6,29 @@ from .dnn_caffe_face_detector.DnnCaffeFaceDetector import DnnCaffeFaceDetector
 from .ULFG_face_detector.UlfgFaceDetector import UlfgFaceDetector
 
 
-class DetectionMethod:
+class DetectionCreator:
     @staticmethod
-    def CASCADE() -> IFaceDetector:
-        return CascadeFaceDetector()
+    def CASCADE():
+        def cascade_creator() -> IFaceDetector:
+            return CascadeFaceDetector()
+        return cascade_creator
 
     @staticmethod
-    def DNN_CAFFE() -> IFaceDetector:
-        return DnnCaffeFaceDetector()
+    def DNN_CAFFE():
+        def dnn_caffe_creator() -> IFaceDetector:
+            return DnnCaffeFaceDetector()
+        return dnn_caffe_creator
 
     # Ultra-Light-Fast-Generic-Face-Detector
     @staticmethod
-    def ULFD() -> IFaceDetector:
-        return UlfgFaceDetector(input_img_width=640)
+    def ULFD(input_img_width: int):
+        def ulfd_creator() -> IFaceDetector:
+            return UlfgFaceDetector(input_img_width=input_img_width)
+        return ulfd_creator
 
 
 class FaceDetector:
-    def __init__(self, detection_method=DetectionMethod.DNN_CAFFE) -> None:
+    def __init__(self, detection_method) -> None:
         self.__detection_method = detection_method
         self.__face_detector = detection_method()
 

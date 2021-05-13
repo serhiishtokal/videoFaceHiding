@@ -2,14 +2,14 @@ from  time import time
 
 import cv2
 
-from services.face_anonymizing_service.FaceAnonymizationService import DetectionMethod, AnonymizeMethod, \
+from services.face_anonymizing_service.FaceAnonymizationService import DetectionCreator, AnonymizeMethod, \
     FaceAnonymizationService
 
-detector_type = DetectionMethod.ULFD
-detector_type_str = detector_type.__name__
+detector = DetectionCreator.ULFD(input_img_width=640)
+# detector = DetectionCreator.DNN_CAFFE()
 
 
-def anonymize_stream(detection_method=DetectionMethod.DNN_CAFFE, anonymize_method=AnonymizeMethod.PIXELATE):
+def anonymize_stream(detection_method, anonymize_method=AnonymizeMethod.PIXELATE):
     face_anonymizer = FaceAnonymizationService(detection_method, anonymize_method)
     video_capture = cv2.VideoCapture(1, cv2.CAP_DSHOW)
     while True:
@@ -25,4 +25,4 @@ def anonymize_stream(detection_method=DetectionMethod.DNN_CAFFE, anonymize_metho
     video_capture.release()
 
 
-anonymize_stream(detector_type, AnonymizeMethod.PIXELATE)
+anonymize_stream(detector, AnonymizeMethod.PIXELATE)

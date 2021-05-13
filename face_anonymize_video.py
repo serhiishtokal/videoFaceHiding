@@ -1,14 +1,14 @@
 from os.path import join, dirname
 import cv2
 
-from services.face_anonymizing_service.FaceAnonymizationService import DetectionMethod, AnonymizeMethod, \
+from services.face_anonymizing_service.FaceAnonymizationService import DetectionCreator, AnonymizeMethod, \
     FaceAnonymizationService
 
 video_file_path = 'd:\STUDY Univer\PolitechnikaLubelska\DYPLOM\Datasets\TikTok\download.mp4'
 output_file_path = join(dirname(video_file_path), "DNN Caffe.mp4")
 
 
-def anonymize_video(input_video_path, output_video_path, detection_method=DetectionMethod.DNN_CAFFE,
+def anonymize_video(input_video_path, output_video_path, detection_method=DetectionCreator.DNN_CAFFE,
                     anonymize_method=AnonymizeMethod.PIXELATE):
     face_anonymizer = FaceAnonymizationService(detection_method, anonymize_method)
 
@@ -39,4 +39,4 @@ def anonymize_video(input_video_path, output_video_path, detection_method=Detect
     cv2.destroyAllWindows()
 
 
-anonymize_video(video_file_path, output_file_path, DetectionMethod.DNN_CAFFE, AnonymizeMethod.PIXELATE)
+anonymize_video(video_file_path, output_file_path, DetectionCreator.DNN_CAFFE, AnonymizeMethod.PIXELATE)

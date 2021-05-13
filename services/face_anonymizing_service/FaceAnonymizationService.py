@@ -1,9 +1,9 @@
-from .face_detectors.FaceDetector import DetectionMethod, FaceDetector
+from .face_detectors.FaceDetector import DetectionCreator, FaceDetector
 from .image_hiders.image_hiding import AnonymizeMethod, anonymize_face
 
 
 class FaceAnonymizationService:
-    def __init__(self, detection_method=DetectionMethod.DNN_CAFFE, anonymize_method=AnonymizeMethod.PIXELATE) -> None:
+    def __init__(self, detection_method, anonymize_method=AnonymizeMethod.PIXELATE) -> None:
         self.__anonymize_method = anonymize_method
         self.__detection_method = detection_method
         self.__face_detector = FaceDetector(detection_method)
