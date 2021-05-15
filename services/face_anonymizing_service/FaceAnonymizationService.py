@@ -8,9 +8,14 @@ class FaceAnonymizationService:
         self.__detection_method = detection_method
         self.__face_detector = FaceDetector(detection_method)
         self.__anonymizer = anonymize_face
+        self.frames = 0
+        self.anonymized_frames = 0
 
     def get_anonymized_frame(self, frame):
         faces = self.__face_detector.detect_faces(frame)
+        self.frames += 1
+        if len(faces) != 0:
+            self.anonymized_frames += 1
         for (x_start, y_start, x_end, y_end) in faces:
             face_box = frame[y_start:y_end, x_start:x_end]
             face_box = self.__anonymizer(face_box, self.__anonymize_method)

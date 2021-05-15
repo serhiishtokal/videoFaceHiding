@@ -5,10 +5,11 @@ from services.face_anonymizing_service.FaceAnonymizationService import Detection
     FaceAnonymizationService
 
 video_file_path = 'd:\STUDY Univer\PolitechnikaLubelska\DYPLOM\Datasets\TikTok\download.mp4'
-output_file_path = join(dirname(video_file_path), "DNN Caffe.mp4")
+output_file_path = join(dirname(video_file_path), "DNN Caffe2.mp4")
+detector = DetectionCreator.ULFD(input_img_width=320)
 
 
-def anonymize_video(input_video_path, output_video_path, detection_method=DetectionCreator.DNN_CAFFE,
+def anonymize_video(input_video_path, output_video_path, detection_method,
                     anonymize_method=AnonymizeMethod.PIXELATE):
     face_anonymizer = FaceAnonymizationService(detection_method, anonymize_method)
 
@@ -35,8 +36,10 @@ def anonymize_video(input_video_path, output_video_path, detection_method=Detect
             print('[INFO] frames processed: ', frame_count)
         else:
             break
+    print('[INFO] Frames: ', face_anonymizer.frames)
+    print('[INFO] Anonymized Frames: ', face_anonymizer.anonymized_frames)
     video_capture.release()
     cv2.destroyAllWindows()
 
 
-anonymize_video(video_file_path, output_file_path, DetectionCreator.DNN_CAFFE, AnonymizeMethod.PIXELATE)
+#anonymize_video(video_file_path, output_file_path, detector, AnonymizeMethod.PIXELATE)

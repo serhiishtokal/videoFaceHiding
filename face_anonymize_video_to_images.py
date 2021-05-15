@@ -4,13 +4,13 @@ import cv2
 from services.face_anonymizing_service.FaceAnonymizationService import DetectionCreator, AnonymizeMethod, \
     FaceAnonymizationService
 
-video_file_path = 'd:\STUDY Univer\PolitechnikaLubelska\DYPLOM\Datasets\TikTok\download.mp4'
-output_directory_path = join(dirname(video_file_path), "anonymized_images")
+# video_file_path = 'd:\STUDY Univer\PolitechnikaLubelska\DYPLOM\Datasets\TikTok\download.mp4'
+# output_directory_path = join(dirname(video_file_path), "anonymized_images")
 
 
-def anonymize_video_to_images_opencv(input_video_path, output_images_directory,
-                                     detection_method=DetectionCreator.DNN_CAFFE,
-                                     anonymize_method=AnonymizeMethod.PIXELATE):
+def anonymize_video_to_images(input_video_path, output_images_directory,
+                              detection_method,
+                              anonymize_method):
     face_anonymizer = FaceAnonymizationService(detection_method, anonymize_method)
 
     video_capture = cv2.VideoCapture(input_video_path)
@@ -28,8 +28,9 @@ def anonymize_video_to_images_opencv(input_video_path, output_images_directory,
         cv2.imwrite(output_path, anonymized_frame)
         frame_count += 1
         print('[INFO] frames processed: ', frame_count)
+    print('[INFO] Frames: ', face_anonymizer.frames)
+    print('[INFO] Anonymized Frames: ', face_anonymizer.anonymized_frames)
     video_capture.release()
     cv2.destroyAllWindows()
 
-
-anonymize_video_to_images_opencv(video_file_path, output_directory_path, DetectionCreator.DNN_CAFFE, AnonymizeMethod.PIXELATE)
+# anonymize_video_to_images_opencv(video_file_path, output_directory_path, DetectionCreator.DNN_CAFFE, AnonymizeMethod.PIXELATE)
