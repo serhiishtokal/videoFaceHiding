@@ -15,8 +15,8 @@ def anonymize_stream(detection_method, anonymize_method=AnonymizeMethod.PIXELATE
     while True:
         start_time = time()
         ret, frame = video_capture.read()
-        face_anonymizer.get_anonymized_frame(frame)
-        cv2.imshow('Video', frame)
+        anonymized_frame = face_anonymizer.get_anonymized_frame(frame)
+        cv2.imshow('Video', anonymized_frame)
         print(time()-start_time)
         # print(f'{detector_type_str} detector inference time: ', time()-start_time)
         if cv2.waitKey(1) & 0xFF == ord('q'):

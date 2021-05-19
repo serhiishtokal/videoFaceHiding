@@ -12,6 +12,7 @@ class FaceAnonymizationService:
         self.anonymized_frames = 0
 
     def get_anonymized_frame(self, frame):
+        frame = frame.copy()
         faces = self.__face_detector.detect_faces(frame)
         self.frames += 1
         if len(faces) != 0:
