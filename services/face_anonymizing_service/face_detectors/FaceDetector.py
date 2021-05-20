@@ -8,29 +8,23 @@ from .ULFG_face_detector.UlfgFaceDetector import UlfgFaceDetector
 
 class DetectionCreator:
     @staticmethod
-    def CASCADE():
-        def cascade_creator() -> IFaceDetector:
-            return CascadeFaceDetector()
-        return cascade_creator
+    def CASCADE() -> IFaceDetector:
+        return CascadeFaceDetector()
 
     @staticmethod
-    def DNN_CAFFE():
-        def dnn_caffe_creator() -> IFaceDetector:
-            return DnnCaffeFaceDetector()
-        return dnn_caffe_creator
+    def DNN_CAFFE() -> IFaceDetector:
+        return DnnCaffeFaceDetector()
 
     # Ultra-Light-Fast-Generic-Face-Detector
     @staticmethod
-    def ULFD(input_img_width: int):
-        def ulfd_creator() -> IFaceDetector:
-            return UlfgFaceDetector(input_img_width=input_img_width)
-        return ulfd_creator
+    def ULFD(input_img_width: int) -> IFaceDetector:
+        return UlfgFaceDetector(input_img_width=input_img_width)
 
 
 class FaceDetector:
     def __init__(self, detection_method) -> None:
         self.__detection_method = detection_method
-        self.__face_detector = detection_method()
+        self.__face_detector = detection_method
 
     def detect_faces(self, image) -> list:
         faces = self.__face_detector.detect_faces(image)
