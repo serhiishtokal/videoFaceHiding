@@ -9,7 +9,7 @@ class AnonymizeMethod:
     BlackRectangle = 3
 
 
-def _pixelate_image(image, blocks=10):
+def _pixelate_image(image, blocks=8):
     (h, w) = image.shape[:2]
     x_steps = np.linspace(0, w, blocks + 1, dtype="int")
     y_steps = np.linspace(0, h, blocks + 1, dtype="int")
