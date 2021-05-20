@@ -1,12 +1,17 @@
-from  time import time
+from time import time
 
 import cv2
 
 from services.face_anonymizing_service.FaceAnonymizationService import DetectionCreator, AnonymizeMethod, \
     FaceAnonymizationService
 
-detector = DetectionCreator.ULFD(input_img_width=640)
+# detector = DetectionCreator.ULFD(input_img_width=320)
 # detector = DetectionCreator.DNN_CAFFE()
+# detector = DetectionCreator.CASCADE()
+
+# anonymizationMethod = AnonymizeMethod.BLUR
+# anonymizationMethod = AnonymizeMethod.PIXELATE
+# anonymizationMethod = AnonymizeMethod.BlackRectangle
 
 
 def anonymize_stream(detection_method, anonymize_method=AnonymizeMethod.PIXELATE):
@@ -17,7 +22,7 @@ def anonymize_stream(detection_method, anonymize_method=AnonymizeMethod.PIXELATE
         ret, frame = video_capture.read()
         anonymized_frame = face_anonymizer.get_anonymized_frame(frame)
         cv2.imshow('Video', anonymized_frame)
-        print(time()-start_time)
+        print(time() - start_time)
         # print(f'{detector_type_str} detector inference time: ', time()-start_time)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -25,4 +30,4 @@ def anonymize_stream(detection_method, anonymize_method=AnonymizeMethod.PIXELATE
     video_capture.release()
 
 
-anonymize_stream(detector, AnonymizeMethod.PIXELATE)
+anonymize_stream(detector, anonymizationMethod)
