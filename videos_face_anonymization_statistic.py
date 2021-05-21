@@ -51,7 +51,7 @@ def anonymize_video(input_video_path):
     while video_capture.isOpened():
         ret, frame = video_capture.read()
         if not ret:
-            print("[INFO] Can't receive frame (stream end?). Exiting ...")
+            # print("[INFO] Can't receive frame (stream end?). Exiting ...")
             break
         faces_count = face_anonymizer.anonymize_frame(frame)
         frames_count += 1
@@ -70,7 +70,7 @@ def proceed():
     elapsed_time = strftime('%H:%M:%S', gmtime(time_end_videos_proc - time_start_videos_proc))
     total_rate = format(t_afc / t_fc, ".4f")
 
-    # print(f'[RESULT] Elapsed total time [{elapsed_time}] total_rate [{total_rate}]')
+    print(f'[RESULT] Elapsed total time [{elapsed_time}] total_rate [{total_rate}]')
     printVideosInfo(videos_info)
 
 
